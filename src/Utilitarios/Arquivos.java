@@ -1,18 +1,30 @@
 package Utilitarios;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public final class Arquivos {
     private Arquivos() {}
     public static String LerArquivo(String caminhoArquivo) {
-        File arquivo = new File(caminhoArquivo);
+        try {
+            File arquivo = new File(caminhoArquivo);
+            Scanner leitor = new Scanner(arquivo);
+            StringBuilder texto = new StringBuilder();
 
-        if(!arquivo.exists()) {
-            throw new RuntimeException("O arquivo especificado nao existe!");
+            while(leitor.hasNextLine()) {
+               texto.append(leitor.nextLine());
+            }
+
+            leitor.close();
+            return texto.toString();
         }
-        return arquivo.toString();
+        catch (FileNotFoundException excecao) {
+           System.out.println(excecao.getMessage());
+        }
+        return null;
     }
 
     public static void CriarArquivo(String nome) {
@@ -24,7 +36,6 @@ public final class Arquivos {
             }else {
                 System.out.println("Nome de arquivo ja existe no repositorio!");
             }
-
         }catch (IOException excecao){
             throw new RuntimeException(excecao);
         }
@@ -34,6 +45,7 @@ public final class Arquivos {
         try{
             FileWriter escritor = new FileWriter(nome);
             escritor.write(texto);
+            escritor.close();
         }
         catch (IOException excecao){
             throw new RuntimeException(excecao);
