@@ -41,6 +41,21 @@ public final class Arquivos {
         }
     }
 
+    public static void CriarArquivo(String nome, String texto) {
+        File arquivo = new File(nome);
+
+        try {
+            if(arquivo.createNewFile()){
+                System.out.println("Arquivo Criado com sucesso.");
+            }else {
+                System.out.println("Nome de arquivo ja existe no repositorio!");
+            }
+            EscreverArquivo(nome, texto);
+        }catch (IOException excecao){
+            throw new RuntimeException(excecao);
+        }
+    }
+
     public static void EscreverArquivo(String nome, String texto) {
         try{
             FileWriter escritor = new FileWriter(nome);
