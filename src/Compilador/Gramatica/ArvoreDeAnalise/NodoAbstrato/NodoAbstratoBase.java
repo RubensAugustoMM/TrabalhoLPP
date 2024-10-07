@@ -33,4 +33,6 @@ public abstract class NodoAbstratoBase implements NodoBase {
     public boolean ValidarSintaxe(){
         return false;
     }
+
+    public abstract boolean ValidarSintaxe(NodoAbstratoBase nodo);
 }

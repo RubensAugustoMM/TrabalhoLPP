@@ -31,6 +31,7 @@ public final class DicionarioTokens {
         _dicionario.put("\n", TokenEnums.QUEBRA_LINHA);
         _dicionario.put("(", TokenEnums.PARENTESES_ESQUERDO);
         _dicionario.put(")", TokenEnums.PARENTESES_DIREITO);
+        _dicionario.put(",", TokenEnums.VIRGULA);
     }
 
     public  TokenEnums RetornarTipo(String str) {
