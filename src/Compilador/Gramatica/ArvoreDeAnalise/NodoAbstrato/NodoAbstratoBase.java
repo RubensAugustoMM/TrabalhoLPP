@@ -1,38 +1,22 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
 import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
+import java.util.List;
 
-public abstract class NodoAbstratoBase implements NodoBase {
+public class NodoAbstratoBase extends NodoBase {
+    private List<NodoBase> _filhos;
 
-    public abstract java.util.List<NodoBase> RetornarNodosFilhos();
-
-    @Override
-    public void AdicionarNodoFilho(NodoBase nodo) {
-
+    public List<NodoBase> RetornarNodosFilhos(){
+        return _filhos;
     }
 
-    @Override
-    public NodoBase RetornarNodoFilho(int posicao) {
-        return null;
-    }
-
-    @Override
-    public void DefinirNodoPai(NodoBase nodo) {
-
-    }
-
-    @Override
-    public NodoBase RetornarNodoPai() {
-        return null;
+    public void AdicionarNodoFilho(NodoBase nodo){
+        _filhos.add(nodo);
     }
 
     public boolean ValidarPredicado(){
         return true;
     }
 
-    public boolean ValidarSintaxe(){
-        return false;
-    }
-
-    public abstract boolean ValidarSintaxe(NodoAbstratoBase nodo);
+    public boolean ValidarSintaxe(){return true;}
 }

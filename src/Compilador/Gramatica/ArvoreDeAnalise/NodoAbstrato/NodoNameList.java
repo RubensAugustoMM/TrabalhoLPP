@@ -1,59 +1,30 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
-import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
 import Compilador.Gramatica.ArvoreDeAnalise.NodoTerminal.NodoTerminal;
 import Compilador.Gramatica.Tokens.TokenEnums;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NodoNameList extends NodoAbstratoBase {
-    private NodoBase _pai;
-    private List<NodoBase> _filhos = new ArrayList<NodoBase>();
-
     @Override
-    public java.util.List<NodoBase> RetornarNodosFilhos() {
-        return _filhos;
-    }
+    public boolean ValidarSintaxe() {
+        var filhos = super.RetornarNodosFilhos();
+        var tamanho = filhos.size();
 
-    @Override
-    public void AdicionarNodoFilho(NodoBase nodo) {
-        _filhos.add(nodo);
-    }
+        if(!(filhos.get(0) instanceof  NodoName))
+            return false;
 
-    @Override
-    public NodoBase RetornarNodoFilho(int posicao) {
-        return _filhos.get(posicao);
-    }
+        if(tamanho == 3){
+            if(!(filhos.get(1) instanceof NodoTerminal))
+                return false;
 
-    @Override
-    public void DefinirNodoPai(NodoBase nodo) {
-        _pai = nodo;
-    }
-
-    @Override
-    public NodoBase RetornarNodoPai() {
-        return _pai;
-    }
-
-    @Override
-    public boolean ValidarSintaxe(NodoAbstratoBase nodo) {
-        int tamanho = _filhos.size();
-
-        if(tamanho == 2){
-            if(_filhos.get(1) instanceof NodoTerminal) {
-                var nodoFilho = (NodoTerminal)_filhos.get(1);
-                if (nodoFilho.RetornarTipo() != TokenEnums.VIRGULA){
-                    return false;
-                }
-            }
-            else{
+            var nodoTerminal = (NodoTerminal)filhos.get(1);
+            if (nodoTerminal.RetornarTipo() != TokenEnums.VIRGULA) {
                 return false;
             }
-            if(_filhos.get(2) instanceof NodoNameList)
-                return ValidarSintaxe((NodoNameList)_filhos.get(2));
+            if(filhos.get(2) instanceof NodoNameList){
+                var nodoNameList = (NodoNameList) filhos.get(2);
+                return nodoNameList.ValidarSintaxe();
+            }
         }
-
         return true;
     }
 }

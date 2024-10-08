@@ -2,15 +2,14 @@ package Compilador.Gramatica.ArvoreDeAnalise;
 
 import java.util.List;
 
-public interface NodoBase {
-    List<NodoBase> RetornarNodosFilhos();
+public class NodoBase {
+    private NodoBase _pai;
 
-    void AdicionarNodoFilho(NodoBase nodo);
+    public void DefinirNodoPai(NodoBase nodo){
+        _pai = nodo;
+    }
 
-    NodoBase RetornarNodoFilho(int posicao);
-
-    void DefinirNodoPai(NodoBase nodo);
-
-    NodoBase RetornarNodoPai();
-
+    public NodoBase RetornarNodoPai(){
+        return _pai;
+    }
 }
