@@ -18,5 +18,7 @@ public class NodoAbstratoBase extends NodoBase {
         return true;
     }
 
-    public boolean ValidarSintaxe(){return true;}
+    public boolean ValidarSintaxe(){
+        return true;
+    }
 }

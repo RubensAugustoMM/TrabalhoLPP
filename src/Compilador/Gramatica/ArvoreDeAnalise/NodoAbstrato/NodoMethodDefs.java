@@ -7,7 +7,7 @@ public class NodoMethodDefs extends NodoAbstratoBase {
         var tamanho = filhos.size();
 
         if(filhos.get(0) instanceof NodoMethodDef){
-            var nodoFilho = filhos.get(0);
+            var nodoFilho =(NodoMethodDf) filhos.get(0);
             return nodoFilho.ValidarSintaxe();
         }
 
