@@ -20,10 +20,12 @@ public class NodoNameList extends NodoAbstratoBase {
             if (nodoTerminal.RetornarTipo() != TokenEnums.VIRGULA) {
                 return false;
             }
-            if(filhos.get(2) instanceof NodoNameList){
-                var nodoNameList = (NodoNameList) filhos.get(2);
-                return nodoNameList.ValidarSintaxe();
-            }
+
+            if(!(filhos.get(2) instanceof NodoNameList))
+                return false;
+
+            var nodoNameList = (NodoNameList) filhos.get(2);
+            return nodoNameList.ValidarSintaxe();
         }
         return true;
     }

@@ -4,10 +4,14 @@ public class NodoMethodDefs extends NodoAbstratoBase {
     @Override
     public boolean ValidarSintaxe() {
         var filhos = super.RetornarNodosFilhos();
+
+        if(filhos.isEmpty())
+            return false;
+
         var tamanho = filhos.size();
 
         if(filhos.get(0) instanceof NodoMethodDef){
-            var nodoFilho =(NodoMethodDf) filhos.get(0);
+            var nodoFilho =(NodoMethodDef) filhos.get(0);
             return nodoFilho.ValidarSintaxe();
         }
 
