@@ -29,7 +29,7 @@ public class NodoBodyStmt extends NodoAbstratoBase{
         }
 
         if(filhos.get(0) instanceof NodoMethodCall){
-            var nodo = (NodoMethodCall) filhos(0);
+            var nodo = (NodoMethodCall) filhos.get(0);
             return nodo.ValidarSintaxe();
         }
 

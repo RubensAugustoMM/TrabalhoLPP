@@ -5,7 +5,7 @@ import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
 import java.util.List;
 
 public class NodoName extends NodoAbstratoBase {
-    private String Nome;
+    private String _nome;
 
     @Override
     public List<NodoBase> RetornarNodosFilhos() {
@@ -13,9 +13,9 @@ public class NodoName extends NodoAbstratoBase {
     }
 
     public String RetornarNome(){
-        return Nome;
+        return _nome;
     }
     public void DefinirNome(String nome){
-        Nome = nome;
+        _nome = nome;
     }
 }
