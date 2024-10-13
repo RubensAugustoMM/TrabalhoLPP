@@ -32,9 +32,6 @@ public class NodoArg extends NodoAbstratoBase{
         if(filhos.get(0) instanceof NodoMethodCall)
             return true;
 
-        if(filhos.get(0) instanceof NodoObjCreation)
-            return true;
-
-        return false;
+        return filhos.get(0) instanceof NodoObjCreation;
     }
 }
