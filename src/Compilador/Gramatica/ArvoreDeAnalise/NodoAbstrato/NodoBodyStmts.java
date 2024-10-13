@@ -13,7 +13,7 @@ public class NodoBodyStmts extends NodoAbstratoBase{
         if(!(filhos.get(0) instanceof NodoBodyStmt))
             return false;
 
-        var nodoBodyStmt = filhos.get(0);
+        var nodoBodyStmt = (NodoBodyStmt)filhos.get(0);
         if(!nodoBodyStmt.ValidarSintaxe())
             return false;
 
