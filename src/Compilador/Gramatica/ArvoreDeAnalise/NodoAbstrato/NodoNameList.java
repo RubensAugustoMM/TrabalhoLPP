@@ -9,6 +9,10 @@ public class NodoNameList extends NodoAbstratoBase {
         var filhos = super.RetornarNodosFilhos();
         var tamanho = filhos.size();
 
+        if(filhos.isEmpty() ||
+         tamanho > 3)
+            return false;
+
         if(!(filhos.get(0) instanceof  NodoName))
             return false;
 
