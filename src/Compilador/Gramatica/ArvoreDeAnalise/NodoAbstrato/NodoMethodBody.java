@@ -30,7 +30,7 @@ public class NodoMethodBody extends  NodoAbstratoBase{
             return false;
 
         var nodoBodyStmts = (NodoBodyStmts)filhos.get(2);
-        if(!NodoBodyStmts.ValidarSintaxe())
+        if(!nodoBodyStmts.ValidarSintaxe())
             return false;
 
         if(!(filhos.get(3) instanceof NodoTerminal))

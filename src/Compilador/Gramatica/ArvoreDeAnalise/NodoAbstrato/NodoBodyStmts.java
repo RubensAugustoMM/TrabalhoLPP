@@ -7,7 +7,7 @@ public class NodoBodyStmts extends NodoAbstratoBase{
         var tamanho = filhos.size();
 
         if(filhos.isEmpty() ||
-            tamanho < 2)
+            tamanho > 2)
             return false;
 
         if(!(filhos.get(0) instanceof NodoBodyStmt))

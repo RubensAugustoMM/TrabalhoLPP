@@ -31,6 +31,6 @@ public class NodoNameList extends NodoAbstratoBase {
             var nodoNameList = (NodoNameList) filhos.get(2);
             return nodoNameList.ValidarSintaxe();
         }
-        return true;
+        else return tamanho == 1;
     }
 }

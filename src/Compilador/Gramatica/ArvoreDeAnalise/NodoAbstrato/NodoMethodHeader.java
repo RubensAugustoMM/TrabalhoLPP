@@ -55,7 +55,6 @@ public class NodoMethodHeader extends NodoAbstratoBase {
                 return false;
 
             nodoTerminal = (NodoTerminal) filhos.get(5);
-            return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
         }
         else {
             if(!(filhos.get(3) instanceof NodoTerminal))
@@ -69,9 +68,7 @@ public class NodoMethodHeader extends NodoAbstratoBase {
                 return false;
 
             nodoTerminal = (NodoTerminal) filhos.get(4);
-            return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
         }
-
-        return true;
+        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
     }
 }

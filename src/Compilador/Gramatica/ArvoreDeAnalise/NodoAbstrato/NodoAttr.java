@@ -9,15 +9,14 @@ public class NodoAttr extends NodoAbstratoBase{
         var filhos = RetornarNodosFilhos();
         var tamanho = filhos.size();
 
-        if(filhos.isEmpty() ||
-                tamanho != 4 && tamanho != 6)
+        if(tamanho < 4 || tamanho > 6)
             return false;
 
         if(!(filhos.get(0) instanceof NodoLhs))
             return false;
 
-        var nodoLhs = filhos.get(0);
-        if(!NodoLhs.ValidarSintaxe())
+        var nodoLhs = (NodoLhs)filhos.get(0);
+        if(!nodoLhs.ValidarSintaxe())
             return false;
 
         if(!(filhos.get(1) instanceof NodoTerminal))
@@ -32,16 +31,15 @@ public class NodoAttr extends NodoAbstratoBase{
                 return false;
 
             var nodoArg = (NodoArg )filhos.get(2);
-            if(!NodoArg.ValidarSintaxe())
+            if(!nodoArg.ValidarSintaxe())
                 return false;
 
             if(!(filhos.get(3) instanceof NodoTerminal))
                 return false;
 
             nodoTerminal = (NodoTerminal)filhos.get(3);
-            return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
         }
-        else{
+        else if( tamanho == 6){
             if(!(filhos.get(2) instanceof NodoArgBin))
                 return false;
 
@@ -67,7 +65,9 @@ public class NodoAttr extends NodoAbstratoBase{
                 return false;
 
             nodoTerminal = (NodoTerminal)filhos.get(5);
-            return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        } else {
+            return false;
         }
+        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
     }
 }

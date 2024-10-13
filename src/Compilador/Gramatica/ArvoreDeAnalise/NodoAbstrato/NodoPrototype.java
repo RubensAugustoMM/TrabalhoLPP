@@ -36,9 +36,6 @@ public class NodoPrototype extends NodoAbstratoBase{
         if(nodoTerminal.RetornarTipo() != TokenEnums.OPERADOR_IGUALDADE)
             return false;
 
-        if(!(filhos.get(4) instanceof NodoName))
-            return false;
-
-        return true;
+        return filhos.get(4) instanceof NodoName;
     }
 }
