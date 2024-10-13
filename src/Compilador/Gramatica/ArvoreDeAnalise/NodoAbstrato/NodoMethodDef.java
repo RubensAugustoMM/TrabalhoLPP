@@ -5,25 +5,25 @@ public class NodoMethodDef extends NodoAbstratoBase {
     public boolean ValidarSintaxe() {
         var filhos = super.RetornarNodosFilhos();
         var tamanho = filhos.size();
-        if(filhos.isEmpty())
+        if(filhos.isEmpty() ||
+                tamanho < 2 ||
+                tamanho  > 3 )
             return false;
 
         if(!(filhos.get(0)  instanceof NodoMethodHeader))
             return false;
 
         var nodoMethodHeader = (NodoMethodHeader)filhos.get(0);
-        return nodoMethodHeader.ValidarSintaxe();
+        if(!nodoMethodHeader.ValidarSintaxe())
+            return false;
 
         if (tamanho == 2) {
             if(!(filhos.get(1) instanceof NodoMethodBody))
                 return false;
 
             var nodoMethodBody = (NodoMethodBody)filhos.get(1);
-            if(!nodoMethodBody.ValidarSintaxe())
-                return false;
-        }
-
-        if(tamanho == 3){
+            return nodoMethodBody.ValidarSintaxe();
+        }else {
             if(!(filhos.get(1) instanceof NodoVarsDef))
                 return false;
 
@@ -38,7 +38,5 @@ public class NodoMethodDef extends NodoAbstratoBase {
             var nodoMethodBody = (NodoMethodBody)filhos.get(2);
             return nodoMethodBody.ValidarSintaxe();
         }
-
-        return true;
     }
 }

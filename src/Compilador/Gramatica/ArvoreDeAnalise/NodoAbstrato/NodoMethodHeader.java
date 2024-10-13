@@ -55,8 +55,7 @@ public class NodoMethodHeader extends NodoAbstratoBase {
                 return false;
 
             nodoTerminal = (NodoTerminal) filhos.get(5);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.QUEBRA_LINHA)
-                return false;
+            return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
         }
         else {
             if(!(filhos.get(3) instanceof NodoTerminal))

@@ -11,4 +11,11 @@ public class NodoName extends NodoAbstratoBase {
     public List<NodoBase> RetornarNodosFilhos() {
         return null;
     }
+
+    public String RetornarNome(){
+        return Nome;
+    }
+    public void DefinirNome(String nome){
+        Nome = nome;
+    }
 }
