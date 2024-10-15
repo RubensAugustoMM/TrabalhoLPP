@@ -24,6 +24,10 @@ public class NodoIf extends NodoAbstratoBase{
         if(!(filhos.get(2) instanceof NodoComparacao))
             return false;
 
+        var nodoComparacao = (NodoComparacao) filhos.get(2);
+        if(!nodoComparacao.ValidarSintaxe())
+            return false;
+
         if(!(filhos.get(3) instanceof NodoName))
             return false;
 

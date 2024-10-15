@@ -1,24 +1,19 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
-import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
-import Compilador.Gramatica.ArvoreDeAnalise.NodoTerminal.NodoTerminal;
 import Compilador.Gramatica.Tokens.TokenEnums;
 
-import java.util.List;
-
 public class NodoOperacao extends NodoAbstratoBase{
-    private TokenEnums _operacao;
-
     @Override
-    public List<NodoBase> RetornarNodosFilhos() {
-        return null;
-    }
+    public boolean ValidarSintaxe() {
+        var filhos = RetornarNodosFilhos();
+        var tamanho = filhos.size();
 
-    public TokenEnums RetornarOperacao() {
-        return _operacao;
-    }
+        if(tamanho != 1)
+            return false;
 
-    public void DefinirOperacao(TokenEnums operacao) {
-        _operacao = operacao;
+        return CompararToken(filhos.get(0), TokenEnums.OPERADOR_ADICAO) ||
+                CompararToken(filhos.get(0), TokenEnums.OPERADOR_SUBTRACAO) ||
+                CompararToken(filhos.get(0), TokenEnums.OPERADOR_MULTIPLICACAO) ||
+                CompararToken(filhos.get(0), TokenEnums.OPERADOR_DIVISAO);
     }
 }
