@@ -37,8 +37,7 @@ public class NodoBodyStmt extends NodoAbstratoBase{
             if(!(filhos.get(0) instanceof NodoTerminal))
                 return false;
 
-            var nodoTerminal = (NodoTerminal) filhos.get(0);
-            if(nodoTerminal.RetornarTipo() !=  TokenEnums.PALAVRA_CHAVE_RETURN)
+            if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_RETURN))
                 return false;
 
             return filhos.get(1) instanceof NodoName;

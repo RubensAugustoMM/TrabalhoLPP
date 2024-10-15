@@ -17,8 +17,7 @@ public class NodoMethodHeader extends NodoAbstratoBase {
         if(!(filhos.get(0) instanceof NodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal) filhos.get(0);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_METHOD)
+        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_METHOD))
             return false;
 
         if(!(filhos.get(1) instanceof NodoName))
@@ -31,11 +30,10 @@ public class NodoMethodHeader extends NodoAbstratoBase {
         if(!(filhos.get(2) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(2);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_ESQUERDO)
+        if(!CompararToken(filhos.get(2), TokenEnums.PARENTESES_ESQUERDO))
             return false;
 
-
+        NodoTerminal nodoTerminal;
         if(tamanho == 6){
             if(!(filhos.get(3) instanceof NodoNameList))
                 return false;
@@ -47,8 +45,7 @@ public class NodoMethodHeader extends NodoAbstratoBase {
             if(!(filhos.get(4) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal) filhos.get(4);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_DIREITO)
+            if(!CompararToken(filhos.get(4), TokenEnums.PARENTESES_DIREITO))
                 return false;
 
             if(!(filhos.get(5) instanceof NodoTerminal))
@@ -60,8 +57,7 @@ public class NodoMethodHeader extends NodoAbstratoBase {
             if(!(filhos.get(3) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal) filhos.get(3);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_ESQUERDO)
+            if(!CompararToken(filhos.get(3), TokenEnums.PARENTESES_ESQUERDO))
                 return false;
 
             if(!(filhos.get(4) instanceof NodoTerminal))
@@ -69,6 +65,6 @@ public class NodoMethodHeader extends NodoAbstratoBase {
 
             nodoTerminal = (NodoTerminal) filhos.get(4);
         }
-        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        return CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA);
     }
 }

@@ -23,7 +23,7 @@ public class NodoAttr extends NodoAbstratoBase{
             return false;
 
         var nodoTerminal = (NodoTerminal)filhos.get(1);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.OPERADOR_IGUALDADE)
+        if(!CompararToken(nodoTerminal, TokenEnums.OPERADOR_IGUALDADE))
             return false;
 
         if(tamanho == 4){
@@ -68,6 +68,6 @@ public class NodoAttr extends NodoAbstratoBase{
         } else {
             return false;
         }
-        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        return CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA);
     }
 }

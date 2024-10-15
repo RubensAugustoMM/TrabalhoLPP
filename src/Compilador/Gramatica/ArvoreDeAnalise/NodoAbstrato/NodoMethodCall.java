@@ -18,8 +18,7 @@ public class NodoMethodCall extends NodoAbstratoBase{
         if(!(filhos.get(1) instanceof NodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal) filhos.get(1);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PONTO)
+        if(!CompararToken(filhos.get(1), TokenEnums.PONTO))
             return false;
 
         if(!(filhos.get(2) instanceof NodoName))
@@ -28,16 +27,15 @@ public class NodoMethodCall extends NodoAbstratoBase{
         if(!(filhos.get(3) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(3);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_ESQUERDO)
+        if(!CompararToken(filhos.get(3), TokenEnums.PARENTESES_ESQUERDO))
             return false;
 
+        NodoTerminal nodoTerminal;
         if(tamanho == 6){
             if(!(filhos.get(4) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal) filhos.get(4);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_DIREITO)
+            if(!CompararToken(filhos.get(4), TokenEnums.PARENTESES_DIREITO))
                 return false;
 
             if(!(filhos.get(5) instanceof NodoTerminal))
@@ -52,8 +50,7 @@ public class NodoMethodCall extends NodoAbstratoBase{
             if(!(filhos.get(5) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal) filhos.get(5);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PARENTESES_DIREITO)
+            if(!CompararToken(filhos.get(5), TokenEnums.PARENTESES_DIREITO))
                 return false;
 
             if(!(filhos.get(6) instanceof NodoTerminal))
@@ -61,6 +58,6 @@ public class NodoMethodCall extends NodoAbstratoBase{
 
             nodoTerminal = (NodoTerminal) filhos.get(6);
         }
-        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        return CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA);
     }
 }

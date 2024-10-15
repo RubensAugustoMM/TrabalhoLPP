@@ -15,15 +15,13 @@ public class NodoMethodBody extends  NodoAbstratoBase{
         if(!(filhos.get(0) instanceof NodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal) filhos.get(0);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_BEGIN)
+        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_BEGIN))
             return false;
 
         if((filhos.get(1) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(1);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.QUEBRA_LINHA)
+        if(!CompararToken(filhos.get(1),TokenEnums.QUEBRA_LINHA))
             return false;
 
         if(!(filhos.get(2) instanceof NodoBodyStmts))
@@ -36,14 +34,12 @@ public class NodoMethodBody extends  NodoAbstratoBase{
         if(!(filhos.get(3) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(3);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_END_METHOD)
+        if(!CompararToken(filhos.get(3), TokenEnums.PALAVRA_CHAVE_END_METHOD))
             return false;
 
         if(!(filhos.get(4) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(4);
-        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        return CompararToken(filhos.get(4), TokenEnums.QUEBRA_LINHA);
     }
 }

@@ -18,22 +18,19 @@ public class NodoPrototype extends NodoAbstratoBase{
         if(!(filhos.get(1) instanceof NodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal) filhos.get(1);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PONTO)
+        if(!CompararToken(filhos.get(1), TokenEnums.PONTO))
             return false;
 
         if(!(filhos.get(2) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(2);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_PROTOTYPE)
+        if(!CompararToken(filhos.get(2), TokenEnums.PALAVRA_CHAVE_PROTOTYPE))
             return false;
 
         if(!(filhos.get(3) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(3);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.OPERADOR_IGUALDADE)
+        if(!CompararToken(filhos.get(3), TokenEnums.OPERADOR_IGUALDADE))
             return false;
 
         return filhos.get(4) instanceof NodoName;

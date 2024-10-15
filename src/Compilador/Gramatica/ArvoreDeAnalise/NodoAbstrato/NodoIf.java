@@ -15,8 +15,7 @@ public class NodoIf extends NodoAbstratoBase{
 
         if(!(filhos.get(0) instanceof NodoTerminal))
             return false;
-        var nodoTerminal = (NodoTerminal) filhos.get(0);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_IF)
+        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_IF))
             return false;
 
         if(!(filhos.get(1) instanceof NodoName))
@@ -30,14 +29,12 @@ public class NodoIf extends NodoAbstratoBase{
 
         if(!(filhos.get(4) instanceof NodoTerminal))
             return false;
-        nodoTerminal = (NodoTerminal) filhos.get(4);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_THEN)
+        if(!CompararToken(filhos.get(4), TokenEnums.PALAVRA_CHAVE_THEN))
             return false;
 
         if(!(filhos.get(5) instanceof NodoTerminal))
             return false;
-        nodoTerminal = (NodoTerminal) filhos.get(5);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.QUEBRA_LINHA)
+        if(!CompararToken(filhos.get(5), TokenEnums.QUEBRA_LINHA))
             return  false;
 
         if(!(filhos.get(6) instanceof NodoIfStmts))
@@ -47,12 +44,12 @@ public class NodoIf extends NodoAbstratoBase{
         if(!nodoIfStmts.ValidarSintaxe())
             return false;
 
+        NodoTerminal nodoTerminal;
         if(tamanho == 9){
             if(!(filhos.get(7) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal) filhos.get(7);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_END_IF)
+            if(!CompararToken(filhos.get(7),TokenEnums.PALAVRA_CHAVE_END_IF))
                 return false;
 
             if(!(filhos.get(8) instanceof NodoTerminal))
@@ -64,15 +61,13 @@ public class NodoIf extends NodoAbstratoBase{
             if(!(filhos.get(7) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal)filhos.get(7);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_ELSE)
+            if(!CompararToken(filhos.get(7), TokenEnums.PALAVRA_CHAVE_ELSE))
                 return false;
 
             if(!(filhos.get(8) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal)filhos.get(8);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.QUEBRA_LINHA)
+            if(!CompararToken(filhos.get(7), TokenEnums.QUEBRA_LINHA))
                 return false;
 
             if(!(filhos.get(9) instanceof NodoIfStmts))
@@ -85,8 +80,7 @@ public class NodoIf extends NodoAbstratoBase{
             if(!(filhos.get(10) instanceof NodoTerminal))
                 return false;
 
-            nodoTerminal = (NodoTerminal)filhos.get(10);
-            if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_END_IF)
+            if(!CompararToken(filhos.get(10), TokenEnums.PALAVRA_CHAVE_END_IF))
                 return false;
 
             if(!(filhos.get(11) instanceof NodoTerminal))

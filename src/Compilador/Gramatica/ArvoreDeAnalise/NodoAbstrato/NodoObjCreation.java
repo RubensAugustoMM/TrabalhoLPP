@@ -15,8 +15,7 @@ public class NodoObjCreation extends NodoAbstratoBase{
         if(!(filhos.get(0) instanceof NodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal) filhos.get(0);
-        if(nodoTerminal.RetornarTipo() != TokenEnums.PALAVRA_CHAVE_NEW)
+        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_NEW))
             return false;
 
         if(!(filhos.get(1) instanceof NodoName))
@@ -25,7 +24,6 @@ public class NodoObjCreation extends NodoAbstratoBase{
         if(!(filhos.get(2) instanceof NodoTerminal))
             return false;
 
-        nodoTerminal = (NodoTerminal) filhos.get(2);
-        return nodoTerminal.RetornarTipo() == TokenEnums.QUEBRA_LINHA;
+        return CompararToken(filhos.get(2), TokenEnums.QUEBRA_LINHA);
     }
 }

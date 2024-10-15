@@ -1,6 +1,9 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
 import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
+import Compilador.Gramatica.ArvoreDeAnalise.NodoTerminal.NodoTerminal;
+import Compilador.Gramatica.Tokens.TokenEnums;
+
 import java.util.List;
 
 public class NodoAbstratoBase extends NodoBase {
@@ -20,5 +23,10 @@ public class NodoAbstratoBase extends NodoBase {
 
     public boolean ValidarSintaxe(){
         return true;
+    }
+
+    public boolean CompararToken(NodoBase nodo, TokenEnums token){
+        var nodoTerminal = (NodoTerminal) nodo;
+        return nodoTerminal.RetornarTipo() == token;
     }
 }

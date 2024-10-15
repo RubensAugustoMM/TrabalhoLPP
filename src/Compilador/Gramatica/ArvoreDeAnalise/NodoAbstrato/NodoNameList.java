@@ -20,8 +20,7 @@ public class NodoNameList extends NodoAbstratoBase {
             if(!(filhos.get(1) instanceof NodoTerminal))
                 return false;
 
-            var nodoTerminal = (NodoTerminal)filhos.get(1);
-            if (nodoTerminal.RetornarTipo() != TokenEnums.VIRGULA) {
+            if (!CompararToken(filhos.get(1), TokenEnums.VIRGULA)) {
                 return false;
             }
 

@@ -12,7 +12,7 @@ public class NodoVarsDef extends NodoAbstratoBase{
         if(!(filhos.get(0) instanceof NodoAttrsDef))
             return false;
 
-        var nodoAttrsDef = filhos.get(0);
-        return nodoAttrsDef.ValidarSentaxe();
+        var nodoAttrsDef = (NodoAttrsDef) filhos.get(0);
+        return nodoAttrsDef.ValidarSintaxe();
     }
 }
