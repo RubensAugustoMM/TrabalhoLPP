@@ -12,25 +12,22 @@ public class NodoAttr extends NodoAbstratoBase{
         if(tamanho < 4 || tamanho > 6)
             return false;
 
-        if(!(filhos.get(0) instanceof NodoLhs))
+        if(!(filhos.getFirst() instanceof NodoLhs nodoLhs))
             return false;
 
-        var nodoLhs = (NodoLhs)filhos.get(0);
         if(!nodoLhs.ValidarSintaxe())
             return false;
 
-        if(!(filhos.get(1) instanceof NodoTerminal))
+        if(!(filhos.get(1) instanceof NodoTerminal nodoTerminal))
             return false;
 
-        var nodoTerminal = (NodoTerminal)filhos.get(1);
         if(!CompararToken(nodoTerminal, TokenEnums.OPERADOR_IGUALDADE))
             return false;
 
         if(tamanho == 4){
-            if(!(filhos.get(2) instanceof NodoArg))
+            if(!(filhos.get(2) instanceof NodoArg nodoArg))
                 return false;
 
-            var nodoArg = (NodoArg )filhos.get(2);
             if(!nodoArg.ValidarSintaxe())
                 return false;
 
@@ -40,17 +37,15 @@ public class NodoAttr extends NodoAbstratoBase{
             nodoTerminal = (NodoTerminal)filhos.get(3);
         }
         else if( tamanho == 6){
-            if(!(filhos.get(2) instanceof NodoArgBin))
+            if(!(filhos.get(2) instanceof NodoArgBin nodoArgBin))
                 return false;
 
-            var nodoArgBin = (NodoArgBin)filhos.get(2);
             if(!nodoArgBin.ValidarSintaxe())
                 return false;
 
-            if(!(filhos.get(3) instanceof NodoOperacao))
+            if(!(filhos.get(3) instanceof NodoOperacao nodoOperacao))
                 return false;
 
-            var nodoOperacao = (NodoOperacao)filhos.get(3);
             if(!nodoOperacao.ValidarSintaxe())
                 return false;
 

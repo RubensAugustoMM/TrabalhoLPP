@@ -18,15 +18,14 @@ public class NodoAttrsDef extends NodoAbstratoBase{
         if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_VARS))
             return false;
 
-        if(!(filhos.get(1) instanceof NodoNameList))
+        if(!(filhos.get(1) instanceof NodoNameList nodoNameList))
             return false;
 
-        var nodoNameList = (NodoNameList) filhos.get(1);
         if(!nodoNameList.ValidarSintaxe())
             return false;
 
-        if(!(filhos.get(2) instanceof NodoTerminal))
+        if(!(filhos.get(2) instanceof NodoTerminal nodoTerminal))
             return false;
-        return CompararToken(filhos.get(2), TokenEnums.QUEBRA_LINHA);
+        return CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA);
     }
 }

@@ -16,10 +16,9 @@ public class NodoLhs extends NodoAbstratoBase{
             return false;
 
         if(tamanho == 3){
-            if(!(filhos.get(1) instanceof NodoTerminal))
+            if(!(filhos.get(1) instanceof NodoTerminal nodoTerminal))
                 return false;
-
-            if(!CompararToken(filhos.get(1), TokenEnums.PONTO))
+            if(!CompararToken(nodoTerminal, TokenEnums.PONTO))
                 return false;
 
             return filhos.get(0) instanceof NodoName;

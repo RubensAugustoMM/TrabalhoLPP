@@ -13,18 +13,16 @@ public class NodoIf extends NodoAbstratoBase{
         tamanho > 12)
             return false;
 
-        if(!(filhos.get(0) instanceof NodoTerminal))
+        if(!(filhos.getFirst() instanceof NodoTerminal nodoTerminal))
             return false;
-        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_IF))
+        if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_IF))
             return false;
 
         if(!(filhos.get(1) instanceof NodoName))
             return false;
 
-        if(!(filhos.get(2) instanceof NodoComparacao))
+        if(!(filhos.get(2) instanceof NodoComparacao nodoComparacao))
             return false;
-
-        var nodoComparacao = (NodoComparacao) filhos.get(2);
         if(!nodoComparacao.ValidarSintaxe())
             return false;
 
@@ -33,63 +31,59 @@ public class NodoIf extends NodoAbstratoBase{
 
         if(!(filhos.get(4) instanceof NodoTerminal))
             return false;
-        if(!CompararToken(filhos.get(4), TokenEnums.PALAVRA_CHAVE_THEN))
+        nodoTerminal = (NodoTerminal) filhos.get(4);
+        if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_THEN))
             return false;
 
         if(!(filhos.get(5) instanceof NodoTerminal))
             return false;
-        if(!CompararToken(filhos.get(5), TokenEnums.QUEBRA_LINHA))
+        nodoTerminal = (NodoTerminal) filhos.get(5);
+        if(!CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA))
             return  false;
 
-        if(!(filhos.get(6) instanceof NodoIfStmts))
+        if(!(filhos.get(6) instanceof NodoIfStmts nodoIfStmts))
             return false;
-
-        var nodoIfStmts = (NodoIfStmts) filhos.get(6);
         if(!nodoIfStmts.ValidarSintaxe())
             return false;
 
-        NodoTerminal nodoTerminal;
         if(tamanho == 9){
             if(!(filhos.get(7) instanceof NodoTerminal))
                 return false;
-
-            if(!CompararToken(filhos.get(7),TokenEnums.PALAVRA_CHAVE_END_IF))
+            nodoTerminal = (NodoTerminal) filhos.get(7);
+            if(!CompararToken(nodoTerminal,TokenEnums.PALAVRA_CHAVE_END_IF))
                 return false;
 
             if(!(filhos.get(8) instanceof NodoTerminal))
                 return false;
-
             nodoTerminal = (NodoTerminal)filhos.get(8);
         }
         else if(tamanho == 12){
             if(!(filhos.get(7) instanceof NodoTerminal))
                 return false;
-
-            if(!CompararToken(filhos.get(7), TokenEnums.PALAVRA_CHAVE_ELSE))
+            nodoTerminal = (NodoTerminal) filhos.get(7);
+            if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_ELSE))
                 return false;
 
             if(!(filhos.get(8) instanceof NodoTerminal))
                 return false;
-
-            if(!CompararToken(filhos.get(7), TokenEnums.QUEBRA_LINHA))
+            nodoTerminal= (NodoTerminal)filhos.get(8);
+            if(!CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA))
                 return false;
 
             if(!(filhos.get(9) instanceof NodoIfStmts))
                 return false;
-
             nodoIfStmts = (NodoIfStmts)filhos.get(9);
             if(!nodoIfStmts.ValidarSintaxe())
                 return false;
 
             if(!(filhos.get(10) instanceof NodoTerminal))
                 return false;
-
-            if(!CompararToken(filhos.get(10), TokenEnums.PALAVRA_CHAVE_END_IF))
+            nodoTerminal = (NodoTerminal)filhos.get(10);
+            if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_END_IF))
                 return false;
 
             if(!(filhos.get(11) instanceof NodoTerminal))
                 return false;
-
             nodoTerminal = (NodoTerminal)filhos.get(11);
         }
         else {

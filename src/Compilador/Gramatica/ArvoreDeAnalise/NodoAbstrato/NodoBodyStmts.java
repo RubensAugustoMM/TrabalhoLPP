@@ -10,18 +10,16 @@ public class NodoBodyStmts extends NodoAbstratoBase{
             tamanho > 2)
             return false;
 
-        if(!(filhos.get(0) instanceof NodoBodyStmt))
+        if(!(filhos.get(0) instanceof NodoBodyStmt nodoBodyStmt))
             return false;
 
-        var nodoBodyStmt = (NodoBodyStmt)filhos.get(0);
         if(!nodoBodyStmt.ValidarSintaxe())
             return false;
 
         if(tamanho == 2){
-            if(!(filhos.get(1) instanceof NodoBodyStmts))
+            if(!(filhos.get(1) instanceof NodoBodyStmts nodoBodyStmts))
                 return false;
 
-            var nodoBodyStmts = (NodoBodyStmts)filhos.get(1);
             return nodoBodyStmts.ValidarSintaxe();
         }
         return true;

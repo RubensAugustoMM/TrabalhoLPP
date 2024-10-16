@@ -9,6 +9,6 @@ public class NodoArgBin extends NodoAbstratoBase{
         if(tamanho != 1)
             return false;
 
-        return filhos.get(0) instanceof NodoName;
+        return filhos.getFirst() instanceof NodoName;
     }
 }

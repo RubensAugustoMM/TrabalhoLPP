@@ -11,10 +11,11 @@ public class NodoComparacao extends NodoAbstratoBase{
         if(tamanho != 1)
             return false;
 
-        return CompararToken(filhos.get(0), TokenEnums.OPERADOR_MAIOR) ||
-               CompararToken(filhos.get(0), TokenEnums.OPERADOR_MENOR) ||
-               CompararToken(filhos.get(0), TokenEnums.OPERADOR_IGUAL) ||
-               CompararToken(filhos.get(0), TokenEnums.OPERADOR_MAIOR_IGUAL) ||
-               CompararToken(filhos.get(0), TokenEnums.OPERADOR_MENOR_IGUAL);
+        var nodoTerminal = filhos.getFirst();
+        return CompararToken(nodoTerminal, TokenEnums.OPERADOR_MAIOR) ||
+               CompararToken(nodoTerminal, TokenEnums.OPERADOR_MENOR) ||
+               CompararToken(nodoTerminal, TokenEnums.OPERADOR_IGUAL) ||
+               CompararToken(nodoTerminal, TokenEnums.OPERADOR_MAIOR_IGUAL) ||
+               CompararToken(nodoTerminal, TokenEnums.OPERADOR_MENOR_IGUAL);
     }
 }

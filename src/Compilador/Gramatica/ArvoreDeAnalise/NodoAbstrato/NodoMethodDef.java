@@ -10,32 +10,28 @@ public class NodoMethodDef extends NodoAbstratoBase {
                 tamanho  > 3 )
             return false;
 
-        if(!(filhos.get(0)  instanceof NodoMethodHeader))
+        if(!(filhos.get(0) instanceof NodoMethodHeader nodoMethodHeader))
             return false;
 
-        var nodoMethodHeader = (NodoMethodHeader)filhos.get(0);
         if(!nodoMethodHeader.ValidarSintaxe())
             return false;
 
         if (tamanho == 2) {
-            if(!(filhos.get(1) instanceof NodoMethodBody))
+            if(!(filhos.get(1) instanceof NodoMethodBody nodoMethodBody))
                 return false;
 
-            var nodoMethodBody = (NodoMethodBody)filhos.get(1);
             return nodoMethodBody.ValidarSintaxe();
         }else {
-            if(!(filhos.get(1) instanceof NodoVarsDef))
+            if(!(filhos.get(1) instanceof NodoVarsDef nodoVarsDef))
                 return false;
 
-            var nodoVarsDef = (NodoVarsDef)filhos.get(1);
             if(!nodoVarsDef.ValidarSintaxe())
                 return false;
 
 
-            if(!(filhos.get(2) instanceof NodoMethodBody))
+            if(!(filhos.get(2) instanceof NodoMethodBody nodoMethodBody))
                 return false;
 
-            var nodoMethodBody = (NodoMethodBody)filhos.get(2);
             return nodoMethodBody.ValidarSintaxe();
         }
     }

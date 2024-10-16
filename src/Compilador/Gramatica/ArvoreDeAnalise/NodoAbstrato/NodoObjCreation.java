@@ -12,10 +12,9 @@ public class NodoObjCreation extends NodoAbstratoBase{
         if(tamanho != 3)
             return false;
 
-        if(!(filhos.get(0) instanceof NodoTerminal))
+        if(!(filhos.get(0) instanceof NodoTerminal nodoTerminal))
             return false;
-
-        if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_NEW))
+        if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_NEW))
             return false;
 
         if(!(filhos.get(1) instanceof NodoName))
@@ -23,7 +22,7 @@ public class NodoObjCreation extends NodoAbstratoBase{
 
         if(!(filhos.get(2) instanceof NodoTerminal))
             return false;
-
-        return CompararToken(filhos.get(2), TokenEnums.QUEBRA_LINHA);
+        nodoTerminal = (NodoTerminal) filhos.get(2);
+        return CompararToken(nodoTerminal, TokenEnums.QUEBRA_LINHA);
     }
 }

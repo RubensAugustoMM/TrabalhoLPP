@@ -13,31 +13,27 @@ public class NodoBodyStmt extends NodoAbstratoBase{
             tamanho > 2)
             return false;
 
-        if(filhos.get(0) instanceof  NodoPrototype){
-            var nodo = (NodoPrototype) filhos.get(0);
-            return nodo.ValidarSintaxe();
+        if(filhos.getFirst() instanceof  NodoPrototype nodoPrototype){
+            return nodoPrototype.ValidarSintaxe();
         }
 
-        if (filhos.get(0) instanceof NodoAttr) {
-            var nodo = (NodoAttr) filhos.get(0);
-            return nodo.ValidarSintaxe();
+        if (filhos.getFirst() instanceof NodoAttr nodoAttr) {
+            return nodoAttr.ValidarSintaxe();
         }
 
-        if(filhos.get(0) instanceof NodoIf) {
-            var nodo = (NodoIf) filhos.get(0);
-            return nodo.ValidarSintaxe();
+        if(filhos.get(0) instanceof NodoIf nodoIf) {
+            return nodoIf.ValidarSintaxe();
         }
 
-        if(filhos.get(0) instanceof NodoMethodCall){
-            var nodo = (NodoMethodCall) filhos.get(0);
-            return nodo.ValidarSintaxe();
+        if(filhos.get(0) instanceof NodoMethodCall nodoMethodCall){
+            return nodoMethodCall.ValidarSintaxe();
         }
 
         if(tamanho == 2){
-            if(!(filhos.get(0) instanceof NodoTerminal))
+            if(!(filhos.get(0) instanceof NodoTerminal nodoTerminal))
                 return false;
 
-            if(!CompararToken(filhos.get(0), TokenEnums.PALAVRA_CHAVE_RETURN))
+            if(!CompararToken(nodoTerminal, TokenEnums.PALAVRA_CHAVE_RETURN))
                 return false;
 
             return filhos.get(1) instanceof NodoName;

@@ -13,21 +13,20 @@ public class NodoNameList extends NodoAbstratoBase {
          tamanho > 3)
             return false;
 
-        if(!(filhos.get(0) instanceof  NodoName))
+        if(!(filhos.getFirst() instanceof  NodoName))
             return false;
 
         if(tamanho == 3){
-            if(!(filhos.get(1) instanceof NodoTerminal))
+            if(!(filhos.get(1) instanceof NodoTerminal nodoTerminal))
                 return false;
-
-            if (!CompararToken(filhos.get(1), TokenEnums.VIRGULA)) {
+            nodoTerminal = (NodoTerminal) filhos.get(1);
+            if (!CompararToken(nodoTerminal, TokenEnums.VIRGULA)) {
                 return false;
             }
 
-            if(!(filhos.get(2) instanceof NodoNameList))
+            if(!(filhos.get(2) instanceof NodoNameList nodoNameList))
                 return false;
-
-            var nodoNameList = (NodoNameList) filhos.get(2);
+            nodoNameList = (NodoNameList) filhos.get(2);
             return nodoNameList.ValidarSintaxe();
         }
         else return tamanho == 1;

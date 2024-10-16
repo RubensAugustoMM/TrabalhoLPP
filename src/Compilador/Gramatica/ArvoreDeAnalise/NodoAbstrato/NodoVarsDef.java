@@ -9,10 +9,8 @@ public class NodoVarsDef extends NodoAbstratoBase{
         if(tamanho != 1)
             return false;
 
-        if(!(filhos.get(0) instanceof NodoAttrsDef))
+        if(!(filhos.getFirst() instanceof NodoAttrsDef nodoAttrsDef))
             return false;
-
-        var nodoAttrsDef = (NodoAttrsDef) filhos.get(0);
         return nodoAttrsDef.ValidarSintaxe();
     }
 }

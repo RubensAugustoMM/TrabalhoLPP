@@ -16,20 +16,17 @@ public class NodoArg extends NodoAbstratoBase{
             return true;
 
         if(tamanho == 2){
-            if(!(filhos.get(0)instanceof NodoName))
+            if(!(filhos.get(0) instanceof NodoName))
                 return false;
 
-            if(!(filhos.get(1) instanceof NodoTerminal))
+            if(!(filhos.get(1) instanceof NodoTerminal nodoTerminal))
                 return false;
 
-            if(!CompararToken(filhos.get(1), TokenEnums.PONTO))
+            if(!CompararToken(nodoTerminal, TokenEnums.PONTO))
                 return false;
 
             return filhos.get(2) instanceof NodoName;
         }
-
-        if(filhos.get(0) instanceof NodoMethodCall)
-            return true;
 
         return filhos.get(0) instanceof NodoObjCreation;
     }

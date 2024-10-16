@@ -11,9 +11,10 @@ public class NodoOperacao extends NodoAbstratoBase{
         if(tamanho != 1)
             return false;
 
-        return CompararToken(filhos.get(0), TokenEnums.OPERADOR_ADICAO) ||
-                CompararToken(filhos.get(0), TokenEnums.OPERADOR_SUBTRACAO) ||
-                CompararToken(filhos.get(0), TokenEnums.OPERADOR_MULTIPLICACAO) ||
-                CompararToken(filhos.get(0), TokenEnums.OPERADOR_DIVISAO);
+        var nodoTerminal = filhos.getFirst();
+        return CompararToken(nodoTerminal, TokenEnums.OPERADOR_ADICAO) ||
+                CompararToken(nodoTerminal, TokenEnums.OPERADOR_SUBTRACAO) ||
+                CompararToken(nodoTerminal, TokenEnums.OPERADOR_MULTIPLICACAO) ||
+                CompararToken(nodoTerminal, TokenEnums.OPERADOR_DIVISAO);
     }
 }

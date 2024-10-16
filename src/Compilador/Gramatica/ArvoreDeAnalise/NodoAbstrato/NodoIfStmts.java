@@ -10,18 +10,14 @@ public class NodoIfStmts extends NodoAbstratoBase{
                 tamanho != 2)
             return false;
 
-        if(!filhos.get(0) instanceof NodoIfStmt)
+        if(!filhos.get(0) instanceof NodoIfStmt nodoIfStmt)
             return false;
-
-        var nodoIfStmt =(NodoIfStmt) filhos.get(0);
         if(!nodoIfStmt.ValidarSintaxe())
             return false;
 
         if(tamanho == 2){
-            if(!(filhos.get(1) instanceof NodoIfStmts))
+            if(!(filhos.get(1) instanceof NodoIfStmts nodoIfStmts))
                 return false;
-
-            var nodoIfStmts = (NodoIfStmts) filhos.get(1);
             return nodoIfStmts.ValidarSintaxe();
         }
         return true;
