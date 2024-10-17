@@ -4,7 +4,7 @@ import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
 
 import java.util.List;
 
-public class NodoName extends NodoAbstratoBase {
+public class NodoName extends NodoBase {
     private String _nome;
 
     @Override

@@ -1,6 +1,8 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
-public class NodoNumber extends NodoAbstratoBase{
+import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
+
+public class NodoNumber extends NodoBase {
     private double _numero;
 
     public double RetornarNumero(){

@@ -1,8 +1,9 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
+import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
 import Compilador.Gramatica.Tokens.TokenEnums;
 
-public class NodoComparacao extends NodoAbstratoBase{
+public class NodoComparacao extends NodoBase {
     @Override
     public boolean ValidarSintaxe() {
         var filhos = RetornarNodosFilhos();

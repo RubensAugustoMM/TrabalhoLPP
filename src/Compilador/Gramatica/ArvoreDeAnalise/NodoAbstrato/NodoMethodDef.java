@@ -1,6 +1,8 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
-public class NodoMethodDef extends NodoAbstratoBase {
+import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
+
+public class NodoMethodDef extends NodoBase {
     @Override
     public boolean ValidarSintaxe() {
         var filhos = super.RetornarNodosFilhos();

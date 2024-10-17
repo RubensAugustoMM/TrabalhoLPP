@@ -1,9 +1,10 @@
 package Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato;
 
+import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
 import Compilador.Gramatica.ArvoreDeAnalise.NodoTerminal.NodoTerminal;
 import Compilador.Gramatica.Tokens.TokenEnums;
 
-public class NodoIf extends NodoAbstratoBase{
+public class NodoIf extends NodoBase {
     @Override
     public boolean ValidarSintaxe() {
         var filhos = RetornarNodosFilhos();

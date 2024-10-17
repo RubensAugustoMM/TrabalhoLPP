@@ -1,11 +1,10 @@
 package Compilador.Gramatica.Tokens;
 
-import java.util.HashMap;
 
 public final class DicionarioTokens {
-    private HashMap<String, TokenEnums> _dicionario = new HashMap<>();
 
     public DicionarioTokens() {
+        /*
         _dicionario.put("class", TokenEnums.PALAVRA_CHAVE_CLASS);
         _dicionario.put("end_class", TokenEnums.PALAVRA_CHAVE_END_CLASS);
         _dicionario.put("method", TokenEnums.PALAVRA_CHAVE_METHOD);
@@ -34,9 +33,11 @@ public final class DicionarioTokens {
         _dicionario.put(",", TokenEnums.VIRGULA);
         _dicionario.put(".", TokenEnums.PONTO);
         _dicionario.put("_prototype", TokenEnums.PALAVRA_CHAVE_PROTOTYPE);
+
+         */
     }
 
     public  TokenEnums RetornarTipo(String str) {
-        return _dicionario.get(str);
+
     }
 }
