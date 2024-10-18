@@ -1,7 +1,6 @@
 package Compilador.AnalizadorLexico;
 
-import Compilador.Gramatica.ArvoreDeAnalise.NodoAbstrato.NodoProgram;
-import Compilador.Gramatica.ArvoreDeAnalise.NodoBase;
+import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
 import java.util.Stack;
 

@@ -1,5 +1,7 @@
 package Compilador.Gramatica.Tokens;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class DicionarioTokens {
 
@@ -38,6 +40,50 @@ public final class DicionarioTokens {
     }
 
     public  TokenEnums RetornarTipo(String str) {
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+    }
+
+    private TokenEnums ValidarOperadorMatematico(String str) {
+        switch (str) {
+            case "=":
+
+                break;
+            case "+":
+
+                break;
+
+
+
+        }
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+        if("=".equals(str)) {
+            return TokenEnums.OPERADOR_IGUALDADE;
+        }
+    }
+
+    private TokenEnums ValidarOperadorLogico(String str) {
+
+    }
+
+    private TokenEnums ValidarPontuacao(String str) {
+
+    }
+
+
+    private TokenEnums ValidarPalavraChave(String str) {
 
     }
 }

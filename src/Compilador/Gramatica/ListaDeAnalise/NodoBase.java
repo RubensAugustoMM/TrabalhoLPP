@@ -1,6 +1,4 @@
-package Compilador.Gramatica.ArvoreDeAnalise;
-
-import java.util.List;
+package Compilador.Gramatica.ListaDeAnalise;
 
 public class NodoBase {
     private NodoBase _pai;
