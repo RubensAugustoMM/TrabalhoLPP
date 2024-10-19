@@ -1,8 +1,8 @@
-package Compilador.Gramatica.ListaDeAnalise.NodoAbstrato;
+package Compilador.Gramatica.ListaDeAnalise.Classe;
 
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
-public class NodoMetodo extends NodoBase {
+public class NodoClasse extends NodoBase {
     private String _nome;
 
     public String ObterNome(){
