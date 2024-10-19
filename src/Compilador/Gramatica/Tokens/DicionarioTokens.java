@@ -43,6 +43,7 @@ public final class DicionarioTokens {
         if("=".equals(str)) {
             return TokenEnums.OPERADOR_IGUALDADE;
         }
+        return TokenEnums.OPERADOR_IGUALDADE;
     }
 
     private TokenEnums ValidarOperadorMatematico(String str) {
@@ -72,18 +73,19 @@ public final class DicionarioTokens {
         if("=".equals(str)) {
             return TokenEnums.OPERADOR_IGUALDADE;
         }
+        return null;
     }
 
     private TokenEnums ValidarOperadorLogico(String str) {
-
+        return null;
     }
 
     private TokenEnums ValidarPontuacao(String str) {
-
+        return null;
     }
 
 
     private TokenEnums ValidarPalavraChave(String str) {
-
+        return null;
     }
 }

@@ -1,9 +1,10 @@
-package Compilador.Gramatica.ListaDeAnalise.NodoAbstrato;
+package Compilador.Gramatica.ListaDeAnalise.Condicional;
 
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
 public class NodoIf extends NodoBase {
     private int _linhas;
+    ComandosCondicionalEnums comando;
 
     public int ObterNumeroDeLinhas(){
         return _linhas;

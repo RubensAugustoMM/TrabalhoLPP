@@ -14,7 +14,15 @@ public class GeradorDeCodigo {
     }
 
     public String GerarByteCode(){
-         for(int i = 0; _codigo.charAt(i) != )
+         for(int i = 0; VerificarFimDoArquivo(i);i++){
+             var charactere = _codigo.charAt(i);
+
+         }
+         return null;
     }
 
+
+    private boolean VerificarFimDoArquivo(int i){
+        return i < _codigo.length();
+    }
 }

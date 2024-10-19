@@ -1,4 +1,4 @@
-package Compilador.Gramatica.ListaDeAnalise.NodoAbstrato;
+package Compilador.Gramatica.ListaDeAnalise.Operacoes;
 
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 import Compilador.Gramatica.Tokens.TokenEnums;

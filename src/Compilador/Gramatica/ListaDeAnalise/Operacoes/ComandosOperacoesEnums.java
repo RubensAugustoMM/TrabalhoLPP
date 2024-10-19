@@ -1,0 +1,14 @@
+package Compilador.Gramatica.ListaDeAnalise.Operacoes;
+
+public enum ComandosOperacoesEnums {
+    COMANDO_OPERACAO_ADD,
+    COMANDO_OPERACAO_SUB,
+    COMANDO_OPERACAO_MUL,
+    COMANDO_OPERACAO_DIV,
+    COMANDO_OPERACAO_GT,
+    COMANDO_OPERACAO_GE,
+    COMANDO_OPERACAO_LT,
+    COMANDO_OPERACAO_LE,
+    COMANDO_OPERACAO_EQ,
+    COMANDO_OPERACAO_NE
+}

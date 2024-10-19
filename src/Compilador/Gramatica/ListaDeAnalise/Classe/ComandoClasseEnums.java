@@ -1,6 +1,9 @@
 package Compilador.Gramatica.ListaDeAnalise.Classe;
 
 public enum ComandoClasseEnums {
-    OPERACAO_CLASSE_NEW,
-    OPERACAO_CLASSE_CALL
+    COMANDO_CLASSE_NEW,
+    COMANDO_CLASSE_CALL,
+    COMANDO_CLASSE_DEFINICAO,
+    COMANDO_BEGIN_CLASS,
+    COMANDO_END_CLASS
 }

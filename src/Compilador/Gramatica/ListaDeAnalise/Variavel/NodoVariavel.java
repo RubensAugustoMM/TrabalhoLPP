@@ -1,4 +1,4 @@
-package Compilador.Gramatica.ListaDeAnalise.NodoAbstrato;
+package Compilador.Gramatica.ListaDeAnalise.Variavel;
 
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
