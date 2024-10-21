@@ -3,13 +3,17 @@ package Compilador.Gramatica.ListaDeAnalise.Operacoes;
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
 public class NodoOperacao extends NodoBase {
-    private TokenEnums _operacao;
+    private ComandosOperacoesEnums _operacao;
 
-    public TokenEnums ObterOperacao(){
+    public NodoOperacao(ComandosOperacoesEnums operacao) {
+        _operacao = operacao;
+    }
+
+    public ComandosOperacoesEnums ObterOperacao(){
         return _operacao;
     }
 
-    public void DefinirOperacao(TokenEnums operacao){
+    public void DefinirOperacao(ComandosOperacoesEnums operacao){
         _operacao = operacao;
     }
 }

@@ -4,7 +4,12 @@ import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 
 public class NodoIf extends NodoBase {
     private int _linhas;
-    ComandosCondicionalEnums comando;
+    ComandosCondicionalEnums _comando;
+
+    public NodoIf(int linhas, ComandosCondicionalEnums comando) {
+        _linhas = linhas;
+        _comando = comando;
+    }
 
     public int ObterNumeroDeLinhas(){
         return _linhas;

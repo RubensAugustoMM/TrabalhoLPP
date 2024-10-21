@@ -5,6 +5,10 @@ import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 public class NodoConstante extends NodoBase {
     private int _valor;
 
+    public NodoConstante(int valor) {
+        _valor = valor;
+    }
+
     public int ObterValor(){
         return _valor;
     }
