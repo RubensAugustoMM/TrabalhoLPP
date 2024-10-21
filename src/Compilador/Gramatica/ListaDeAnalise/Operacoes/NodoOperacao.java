@@ -1,7 +1,6 @@
 package Compilador.Gramatica.ListaDeAnalise.Operacoes;
 
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
-import Compilador.Gramatica.Tokens.TokenEnums;
 
 public class NodoOperacao extends NodoBase {
     private TokenEnums _operacao;
