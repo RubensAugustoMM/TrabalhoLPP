@@ -5,12 +5,11 @@ import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 public class NodoVariavel extends NodoBase {
     private String _nome;
     private Object _valor;
-    private ComandoVariavelEnums _comando;
 
-    public NodoVariavel(String nome, Object valor, ComandoVariavelEnums _comando) {
+    public NodoVariavel(String nome, Object valor, ComandoVariavelEnums comando, NodoBase pai) {
+        super(pai, comando);
         _nome = nome;
         _valor = valor;
-        _comando = _comando;
     }
 
     public String ObterNome(){

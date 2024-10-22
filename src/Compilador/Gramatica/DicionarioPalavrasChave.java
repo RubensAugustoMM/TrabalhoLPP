@@ -19,16 +19,17 @@ public final class DicionarioPalavrasChave {
     }
 
     public static NodoBase ObterNodo(String linha, NodoBase nodoAnterior){
-        NodoBase nodo;
+        NodoBase nodo = null;
         _nodoAnterior = nodoAnterior;
 
         nodo = ValidarVariavel(linha);
+        if(nodo =)
         nodo = ValidarClasse(linha);
         nodo = ValidarMetodo(linha);
         nodo = ValidarOperacao(linha);
         nodo = ValidarConstate(linha);
 
-        return nodo;
+        return null;
     }
 
     private static NodoOperacao ValidarOperacao(String linha) {
@@ -37,6 +38,15 @@ public final class DicionarioPalavrasChave {
 
     private static NodoVariavel ValidarVariavel(String linha) {
         Pattern padrao = Pattern.compile("\\s+^var");
+        Matcher combinador = padrao.matcher(linha);
+
+        if(combinador.find()){
+            return new NodoVariavel(
+                    ObterNome(linha.substring(combinador.end())),
+                    null,
+
+            );
+        }
     }
 
     private static NodoMetodo ValidarMetodo(String linha) {
@@ -89,7 +99,6 @@ public final class DicionarioPalavrasChave {
 
         return null;
     }
-
 
     private static String ProcurarNome(NodoBase nodo){
         if(nodo.RetornarNodoPai() == null)

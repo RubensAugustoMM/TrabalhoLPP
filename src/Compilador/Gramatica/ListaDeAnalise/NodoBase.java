@@ -5,7 +5,12 @@ import Compilador.Gramatica.ListaDeAnalise.Classe.ComandoClasseEnums;
 public class NodoBase {
     private NodoBase _pai;
     private NodoBase _proximoNodo;
-    protected Enum _comando;
+    private Enum _comando;
+
+    public NodoBase(NodoBase pai, Enum comando) {
+        pai = _pai;
+        _proximoNodo = pai;
+    }
 
     public void DefinirNodoPai(NodoBase nodo){
         _pai = nodo;
@@ -14,7 +19,6 @@ public class NodoBase {
     public NodoBase RetornarNodoPai(){
         return _pai;
     }
-
 
     public Enum ObterComando(){
         return _comando;

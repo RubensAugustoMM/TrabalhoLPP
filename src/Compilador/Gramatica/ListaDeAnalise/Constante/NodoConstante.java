@@ -5,7 +5,8 @@ import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 public class NodoConstante extends NodoBase {
     private int _valor;
 
-    public NodoConstante(int valor) {
+    public NodoConstante(int valor, ComandoConstanteEums comando, NodoBase pai) {
+        super(pai, comando);
         _valor = valor;
     }
 
