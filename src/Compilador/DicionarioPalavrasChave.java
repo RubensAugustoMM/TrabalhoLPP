@@ -1,5 +1,6 @@
 package Compilador;
 
+import Compilador.Gramatica.ListaDeAnalise.Classe.ComandoClasseEnums;
 import Compilador.Gramatica.ListaDeAnalise.Classe.NodoClasse;
 import Compilador.Gramatica.ListaDeAnalise.Constante.NodoConstante;
 import Compilador.Gramatica.ListaDeAnalise.Metodo.NodoMetodo;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 public final class DicionarioPalavrasChave {
     static String[] palavrasChave = {"class", "method", "begin", "self", "vars", "end","if","return",
                                         "eq", "ne", "lt", "le", "gt", "ge", "new", "main", "io"};
+    static String PadraoNomes = "[a-zA-Z]+";
 
     private  DicionarioPalavrasChave() {
     }
@@ -30,9 +32,7 @@ public final class DicionarioPalavrasChave {
     }
 
     private static NodoOperacao ValidarOperacao(String linha) {
-        Pattern padrao = Pattern.compile("^" + palavrasChave[0]);
-        Matcher combinador = padrao.matcher(linha);
-        if
+
     }
 
     private static NodoVariavel ValidarVariavel(String linha) {
@@ -42,9 +42,22 @@ public final class DicionarioPalavrasChave {
     }
 
     private static NodoClasse ValidarClasse(String linha) {
+        Pattern padrao = Pattern.compile("^" + palavrasChave[0]);
+        Matcher combinador = padrao.matcher(linha);
+        combinador.end()
+
+        if(combinador.find())
+            return new NodoClasse(, ComandoClasseEnums.COMANDO_CLASSE_NEW);
     }
 
     private static NodoConstante ValidarConstate(String linha){
 
+    }
+
+    private String RetornaNome(String linha) {
+        Pattern padrao = Pattern.compile(PadraoNomes);
+        Matcher combinador = padrao.matcher(linha);
+
+        return combinador.pattern();
     }
 }
