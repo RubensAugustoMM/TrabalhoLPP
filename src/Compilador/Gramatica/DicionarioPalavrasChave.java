@@ -23,7 +23,6 @@ public final class DicionarioPalavrasChave {
         _nodoAnterior = nodoAnterior;
 
         nodo = ValidarVariavel(linha);
-        if(nodo =)
         nodo = ValidarClasse(linha);
         nodo = ValidarMetodo(linha);
         nodo = ValidarOperacao(linha);
@@ -60,41 +59,56 @@ public final class DicionarioPalavrasChave {
     private static NodoClasse ValidarClasse(String linha) {
         Pattern padrao = Pattern.compile("\\s+^class");
         Matcher combinador = padrao.matcher(linha);
-        if(combinador.find())
-            return new NodoClasse(
+        if(combinador.find()) {
+            var nodo =  new NodoClasse(
                     ObterNome(linha.substring(combinador.end())),
-                    ComandoClasseEnums.COMANDO_CLASSE_DEFINICAO
+                    ComandoClasseEnums.COMANDO_CLASSE_DEFINICAO,
+                    _nodoAnterior
             );
+            _nodoAnterior = nodo;
+            return nodo;
+        }
 
         padrao = Pattern.compile("\\s+^begin");
         combinador = padrao.matcher(linha);
         if(combinador.find()){
             var nome = ProcurarNome(_nodoAnterior);
-            if(nome != null)
-                return new NodoClasse(
+            if(nome != null){
+                var nodo = new NodoClasse(
                         nome,
-                        ComandoClasseEnums.COMANDO_BEGIN_CLASS
+                        ComandoClasseEnums.COMANDO_BEGIN_CLASS,
+                        _nodoAnterior
                 );
+                _nodoAnterior = nodo;
+                return nodo;
+            }
         }
 
         padrao = Pattern.compile("\\s+^end-class");
         combinador = padrao.matcher(linha);
         if(combinador.find()){
             var nome = ProcurarNome(_nodoAnterior);
-            if(nome != null)
-                return new NodoClasse(
+            if(nome != null){
+                var nodo =  new NodoClasse(
                         nome,
-                        ComandoClasseEnums.COMANDO_END_CLASS
+                        ComandoClasseEnums.COMANDO_END_CLASS,
+                        _nodoAnterior
                 );
+                _nodoAnterior = nodo;
+                return nodo;
+            }
         }
 
         padrao = Pattern.compile("new");
         combinador = padrao.matcher(linha);
         if(combinador.find()){
-            return new NodoClasse(
+            var nodo = new NodoClasse(
                     ObterNome(linha.substring(combinador.end())),
-                    ComandoClasseEnums.COMANDO_CLASSE_NEW
+                    ComandoClasseEnums.COMANDO_CLASSE_NEW,
+                    _nodoAnterior
             );
+            _nodoAnterior = nodo;
+            return nodo;
         }
 
         return null;
