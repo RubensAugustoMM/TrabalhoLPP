@@ -6,6 +6,7 @@ import Compilador.Gramatica.ListaDeAnalise.Constante.NodoConstante;
 import Compilador.Gramatica.ListaDeAnalise.Metodo.NodoMetodo;
 import Compilador.Gramatica.ListaDeAnalise.NodoBase;
 import Compilador.Gramatica.ListaDeAnalise.Operacoes.NodoOperacao;
+import Compilador.Gramatica.ListaDeAnalise.Variavel.ComandoVariavelEnums;
 import Compilador.Gramatica.ListaDeAnalise.Variavel.NodoVariavel;
 
 import java.util.regex.Matcher;
@@ -22,11 +23,11 @@ public final class DicionarioPalavrasChave {
         NodoBase nodo = null;
         _nodoAnterior = nodoAnterior;
 
+        nodo = ValidarConstate(linha);
         nodo = ValidarVariavel(linha);
         nodo = ValidarClasse(linha);
         nodo = ValidarMetodo(linha);
         nodo = ValidarOperacao(linha);
-        nodo = ValidarConstate(linha);
 
         return null;
     }
@@ -36,15 +37,31 @@ public final class DicionarioPalavrasChave {
     }
 
     private static NodoVariavel ValidarVariavel(String linha) {
-        Pattern padrao = Pattern.compile("\\s+^var");
+        Pattern padrao = Pattern.compile("\\s*^var");
         Matcher combinador = padrao.matcher(linha);
 
         if(combinador.find()){
-            return new NodoVariavel(
-                    ObterNome(linha.substring(combinador.end())),
-                    null,
+            NodoVariavel nodo = null;
+            var subLinha = linha.substring(combinador.end());
+            padrao = Pattern.compile(_padraoNomes);
+            combinador = padrao.matcher(subLinha);
+            while(combinador.find()){
+                nodo = new NodoVariavel(
+                        ObterNome(subLinha),
+                        ComandoVariavelEnums.COMANDO_VARIAVEL_VAR,
+                        _nodoAnterior
+                );
+                _nodoAnterior = nodo;
+                combinador = padrao.matcher(subLinha.substring(combinador.end()));
+            }
+            return nodo;
+        }
 
-            );
+        padrao = Pattern.compile("\\s*^"+_padraoNomes);
+        combinador = padrao.matcher(linha);
+
+        if(combinador.find()){
+
         }
     }
 
@@ -69,7 +86,7 @@ public final class DicionarioPalavrasChave {
             return nodo;
         }
 
-        padrao = Pattern.compile("\\s+^begin");
+        padrao = Pattern.compile("\\s*^begin");
         combinador = padrao.matcher(linha);
         if(combinador.find()){
             var nome = ProcurarNome(_nodoAnterior);
@@ -84,7 +101,7 @@ public final class DicionarioPalavrasChave {
             }
         }
 
-        padrao = Pattern.compile("\\s+^end-class");
+        padrao = Pattern.compile("\\s*^end-class");
         combinador = padrao.matcher(linha);
         if(combinador.find()){
             var nome = ProcurarNome(_nodoAnterior);
