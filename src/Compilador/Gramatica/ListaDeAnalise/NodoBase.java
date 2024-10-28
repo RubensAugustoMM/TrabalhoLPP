@@ -30,7 +30,8 @@ public class NodoBase {
         return _proximoNodo;
     }
 
-    public void AtribuirProximoNodo(NodoBase nodo){
+    public void DefinirProximoNodo(NodoBase nodo){
+        nodo.DefinirNodoAnterior(this);
         _proximoNodo = nodo;
     }
 }

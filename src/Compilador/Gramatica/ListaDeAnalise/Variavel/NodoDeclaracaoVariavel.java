@@ -25,6 +25,7 @@ public class NodoDeclaracaoVariavel extends NodoBase {
     private void AdicionarVariavel(NodoVariavel nodo, NodoVariavel proximoNodo){
         if(proximoNodo.ObterProximoNodo() == null){
             proximoNodo.DefinirProximoNodo(nodo);
+            nodo.DefinirProximoNodo(proximoNodo);
             return;
         }
 
