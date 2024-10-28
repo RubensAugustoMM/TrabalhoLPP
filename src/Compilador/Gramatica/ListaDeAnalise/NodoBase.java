@@ -1,23 +1,21 @@
 package Compilador.Gramatica.ListaDeAnalise;
 
-import Compilador.Gramatica.ListaDeAnalise.Classe.ComandoClasseEnums;
-
 public class NodoBase {
-    private NodoBase _pai;
+    private NodoBase _nodoAnterior;
     private NodoBase _proximoNodo;
     private Enum _comando;
 
     public NodoBase(NodoBase pai, Enum comando) {
-        pai = _pai;
+        pai = _nodoAnterior;
         _proximoNodo = pai;
     }
 
-    public void DefinirNodoPai(NodoBase nodo){
-        _pai = nodo;
+    public void DefinirNodoAnterior(NodoBase nodo){
+        _nodoAnterior = nodo;
     }
 
-    public NodoBase RetornarNodoPai(){
-        return _pai;
+    public NodoBase RetornarNodoAnterior(){
+        return _nodoAnterior;
     }
 
     public Enum ObterComando(){
