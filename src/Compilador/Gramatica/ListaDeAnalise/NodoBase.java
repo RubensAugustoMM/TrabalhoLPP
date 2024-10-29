@@ -34,4 +34,8 @@ public class NodoBase {
         nodo.DefinirNodoAnterior(this);
         _proximoNodo = nodo;
     }
+
+    public String RetornaTextoComando(){
+        return null;
+    }
 }

@@ -17,4 +17,18 @@ public class NodoClasse extends NodoBase {
     public void DefinirNome(String nome){
         _nome = nome;
     }
+
+    @Override
+    public String RetornaTextoComando() {
+        if(ObterComando() == ComandoClasseEnums.COMANDO_CLASSE_DEFINICAO)
+            return "class " +ObterNome();
+
+        if(ObterComando() == ComandoClasseEnums.COMANDO_CLASSE_NEW)
+            return "class " +ObterNome();
+
+        if(ObterComando() == ComandoClasseEnums.COMANDO_END_CLASS)
+            return "end-class";
+
+        return null;
+    }
 }

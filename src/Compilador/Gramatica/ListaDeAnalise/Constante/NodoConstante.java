@@ -17,4 +17,9 @@ public class NodoConstante extends NodoBase {
     public void DefinirValor(int valor){
         _valor = valor;
     }
+
+    @Override
+    public String RetornaTextoComando() {
+        return "const" + _valor;
+    }
 }

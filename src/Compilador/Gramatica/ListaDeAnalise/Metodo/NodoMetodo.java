@@ -38,4 +38,10 @@ public class NodoMetodo extends NodoBase {
     public void DefinirNome(String nome){
         _nome = nome;
     }
+
+    @Override
+    public String RetornaTextoComando() {
+        if(ObterComando() == ComandoMetodoEnum.COMANDO_METODO_CALL)
+            return
+    }
 }

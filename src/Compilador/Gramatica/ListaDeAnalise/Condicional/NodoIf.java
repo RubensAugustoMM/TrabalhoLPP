@@ -17,4 +17,15 @@ public class NodoIf extends NodoBase {
     public void DefinirLinhas(int linhas){
         _linhas = linhas;
     }
+
+    @Override
+    public String RetornaTextoComando() {
+        if (ObterComando() == ComandosCondicionalEnums.COMANDOS_CONDICIONAL_IF)
+            return "if " + _linhas;
+
+        if (ObterComando() == ComandosCondicionalEnums.COMANDO_CONDICIONAL_ELSE)
+            return "else " + _linhas;
+
+        return null;
+    }
 }
