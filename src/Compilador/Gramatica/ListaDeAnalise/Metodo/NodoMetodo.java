@@ -22,8 +22,8 @@ public class NodoMetodo extends NodoBase {
     }
 
     public void AdicionarAtributo(NodoVariavel atributo,NodoBase proximoAtributo){
-        if(proximoAtributo.RetornarProximoNodo() == null){
-            proximoAtributo.DefinirProximoNodo(atributo);
+        if(proximoAtributo == null){
+            proximoAtributo = atributo;
             atributo.DefinirNodoAnterior(proximoAtributo);
             return;
         }
@@ -39,9 +39,37 @@ public class NodoMetodo extends NodoBase {
         _nome = nome;
     }
 
+    private String RetornaAtributos(NodoVariavel nodo){
+        if(nodo == null)
+            return "";
+
+        if(nodo.RetornarProximoNodo() == null)
+            return nodo.ObterNome();
+
+        return nodo.ObterNome() + "," + RetornaAtributos(nodo.ObterProximoNodo());
+    }
+
     @Override
     public String RetornaTextoComando() {
         if(ObterComando() == ComandoMetodoEnum.COMANDO_METODO_CALL)
-            return
+            return "call " + ObterNome();
+
+        if(ObterComando() == ComandoMetodoEnum.COMANDO_METHOD_DEFINICAO)
+            return "method " + ObterNome() + "(" + RetornaAtributos(_atributos) + ")";
+
+        if(ObterComando() == ComandoMetodoEnum.COMANDO_BEGIN_METHOD)
+            return "begin ";
+
+        if(ObterComando() == ComandoMetodoEnum.COMANDO_END_METHOD)
+            return "end ";
+
+        if(ObterComando() == ComandoMetodoEnum.COMANDO_METODO_RET){
+            if(ObterNome() == null)
+                return "ret ";
+
+            return "ret " + ObterNome();
+        }
+
+        return null;
     }
 }

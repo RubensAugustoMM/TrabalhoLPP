@@ -21,7 +21,7 @@ public class GeradorDeCodigo {
 
     private final String _padraoNome = "^(?!class|method|begin|self|vars|end|if|return|" +
                                         "eq|ne|lt|le|gt|ge|new|main|io|end-method|end-class|" +
-                                        "else|end-if)[a-zA-Z]+";
+                                        "else|end-if)[a-zA-Z[^\\s]]+";
 
     public GeradorDeCodigo(String codigo) {
         _codigo = codigo;
@@ -29,13 +29,21 @@ public class GeradorDeCodigo {
 
     public String GerarByteCode(){
              GerarListaDeAnalise();
-             var byteCode = GerarCodigo();
+             var byteCode = GerarCodigo(_nodoInicial);
 
          return byteCode;
     }
 
-    private String GerarCodigo() {
+    private String GerarCodigo(NodoBase nodo) {
+        if(nodo == null)
+            return "";
+
+        if(nodo.RetornarProximoNodo() == null)
+            return nodo.RetornaTextoComando() + "\n";
+
+        return nodo.RetornaTextoComando() +"\n"+ GerarCodigo(nodo.RetornarProximoNodo());
     }
+
 
     private void GerarListaDeAnalise() {
         for(_index = 0; VerificarFimDoArquivo(_index);_index++) {
@@ -43,59 +51,98 @@ public class GeradorDeCodigo {
                 continue;
 
             Pattern padrao = Pattern.compile("^vars");
-            Matcher combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()) {
-                ObterDeclaracoesDeVariaveis(_codigo.substring(combinador.end()));
+            Matcher combinadorVars = padrao.matcher(_codigo.substring(_index));
+            if(combinadorVars.find()) {
+                ObterDeclaracoesDeVariaveis(_codigo.substring(combinadorVars.end()+_index));
+                _index += combinadorVars.end();
                 continue;
             }
 
             padrao = Pattern.compile("^class");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterDeclaracaoDeClasse(_codigo.substring(combinador.end()));
+            Matcher combinadorClass = padrao.matcher(_codigo.substring(_index));
+            if(combinadorClass.find()){
+                ObterDeclaracaoDeClasse(_codigo.substring(combinadorClass.end()+_index));
+                _index += combinadorClass.end();
                 continue;
             }
 
             padrao = Pattern.compile("^method");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterDefinicaoDeMetodo(_codigo.substring(combinador.end()));
+            Matcher combinadorMethod = padrao.matcher(_codigo.substring(_index));
+            if(combinadorMethod.find()){
+                ObterDefinicaoDeMetodo(_codigo.substring(combinadorMethod.end()+_index));
+                _index += combinadorMethod.end();
                 continue;
             }
 
             padrao = Pattern.compile("^begin");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterNodoBegin(_codigo.substring(combinador.end()));
+            Matcher combinadorBegin = padrao.matcher(_codigo.substring(_index));
+            if(combinadorBegin.find()){
+                ObterNodoBegin(_codigo.substring(combinadorBegin.end()+_index));
+                _index += combinadorBegin.end();
                 continue;
             }
 
             padrao = Pattern.compile("^end-method");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterNodoEndMethod(_codigo.substring(combinador.end()));
+            Matcher combinadorEndMethod = padrao.matcher(_codigo.substring(_index));
+            if(combinadorEndMethod.find()){
+                ObterNodoEndMethod(_codigo.substring(combinadorEndMethod.end()+_index));
+                _index += combinadorEndMethod.end();
                 continue;
             }
 
             padrao = Pattern.compile("^end-class");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterNodoEndClass(_codigo.substring(combinador.end()));
+            Matcher combinadorEndClass = padrao.matcher(_codigo.substring(_index));
+            if(combinadorEndClass.find()){
+                ObterNodoEndClass(_codigo.substring(combinadorEndClass.end()+_index));
+                _index += combinadorEndClass.end();
                 continue;
             }
 
             padrao = Pattern.compile("^main");
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find()){
-                ObterNodoMetodoMain(_codigo.substring(combinador.end()));
+            Matcher combinadorMain = padrao.matcher(_codigo.substring(_index));
+            if(combinadorMain.find()){
+                ObterNodoMetodoMain();
+                _index += combinadorMain.end();
+                continue;
+            }
+
+            padrao = Pattern.compile("^return");
+            Matcher combinadorReturn = padrao.matcher(_codigo.substring(_index));
+            if(combinadorReturn.find()){
+                ObterNodoMetodoReturn(_codigo.substring(combinadorReturn.end()+_index));
+                _index += combinadorReturn.end();
                 continue;
             }
 
             padrao = Pattern.compile(_padraoNome);
-            combinador = padrao.matcher(_codigo.substring(_index));
-            if(combinador.find())
+            Matcher combinadorPadraoNome = padrao.matcher(_codigo.substring(_index));
+            if(combinadorPadraoNome.find()){
                 ObterNodoVariavel(_codigo.substring(_index));
+                _index += combinadorPadraoNome.end();
+            }
         }
+    }
+
+    private void ObterNodoMetodoReturn(String substring) {
+        for(int i=0;substring.charAt(i)!= '\n';i++){
+            Pattern padrao = Pattern.compile(_padraoNome);
+            Matcher combinador = padrao.matcher(substring.substring(i));
+            if(combinador.find()){
+                AdicionarNodo(new NodoMetodo(
+                        substring.substring(combinador.start(),combinador.end()),
+                        ComandoMetodoEnum.COMANDO_METODO_RET,
+                        _nodoAtual
+                ));
+                _index += combinador.end();
+                return;
+            }
+        }
+
+        AdicionarNodo(new NodoMetodo(
+                null,
+                ComandoMetodoEnum.COMANDO_METODO_RET,
+                _nodoAtual
+        ));
     }
 
     private void ObterNodoVariavel(String substring) {
@@ -109,7 +156,7 @@ public class GeradorDeCodigo {
                         listaTemp,
                         substring.substring(combinador.start(), combinador.end()));
                 i = combinador.end();
-                continue;
+                _index = combinador.end();
             }
         }
     }
@@ -119,15 +166,16 @@ public class GeradorDeCodigo {
         Matcher combinador = padrao.matcher(substring);
         if(combinador.find()) {
             var nodo = new NodoVariavel(
-                    substring.substring(combinador.start(), combinador.end() - 1),
+                    substring.substring(combinador.start(), combinador.end()),
                     ComandoVariavelEnums.COMANDO_VARIAVEL_GET,
                     nodoListaContainer.ObterNodo()
             );
+            _index = combinador.end();
 
             if (nodoListaContainer.ObterNodo() == null)
                 nodoListaContainer.DefinirNodo(nodo);
             else
-                AdicionarNodoListaTemp(nodo, nodoListaContainer.ObterNodo());
+                AdicionarNodoListaTemp(nodo, nodoListaContainer);
         }
 
         padrao = Pattern.compile("^\\.[a-zA-Z]+");
@@ -138,15 +186,16 @@ public class GeradorDeCodigo {
                     ComandoVariavelEnums.COMANDO_VARIAVEL_GET,
                     nodoListaContainer.ObterNodo()
             );
+            _index = combinador.end();
 
             if (nodoListaContainer.ObterNodo() == null)
                 nodoListaContainer.DefinirNodo(nodo);
             else
-                AdicionarNodoListaTemp(nodo, nodoListaContainer.ObterNodo());
+                AdicionarNodoListaTemp(nodo, nodoListaContainer);
         }
     }
 
-    private void ObterNodoMetodoMain(String substring) {
+    private void ObterNodoMetodoMain() {
          AdicionarNodo(new NodoMetodo(
             "main",
             ComandoMetodoEnum.COMANDO_METHOD_DEFINICAO,
@@ -198,28 +247,31 @@ public class GeradorDeCodigo {
             Matcher combinador = padrao.matcher(substring.substring(j));
             if(combinador.find()){
                     nodo = new NodoMetodo(
-                        substring.substring(combinador.start(), combinador.end()),
+                        substring.substring(combinador.start(), combinador.end() -1),
                         ComandoMetodoEnum.COMANDO_METHOD_DEFINICAO,
                         _nodoAtual
-                );
+                    );
 
-                AdicionarNodo(nodo);
+                    AdicionarNodo(nodo);
+                    _index += combinador.end()+j;
+                    return;
             }
         }
 
+        Matcher combinador = padrao.matcher(substring.substring(j));
         for(; substring.charAt(j) != ')';j++){
             if(IgnorarCaractere(substring.charAt(j)))
                 continue;
 
-            Matcher combinador = padrao.matcher(substring.substring(j));
             if(combinador.find() && nodo != null){
                 nodo.AdicionarAtributo(new NodoVariavel(
-                        substring.substring(combinador.start(),combinador.end()),
+                        substring.substring(combinador.start(),combinador.end() +1),
                         ComandoVariavelEnums.COMANDO_VARIAVEL_ATRIBUTO,
                         nodo
                 ));
             }
         }
+        _index = combinador.end()+1;
     }
 
     private void ObterDeclaracaoDeClasse(String substring) {
@@ -231,10 +283,11 @@ public class GeradorDeCodigo {
             Matcher combinador = padrao.matcher(substring.substring(j));
             if(combinador.find()){
                 var nodo = new NodoClasse(
-                        substring.substring(combinador.start(),combinador.end()),
+                        substring.substring(combinador.start(),combinador.end() +1),
                         ComandoClasseEnums.COMANDO_CLASSE_DEFINICAO,
                         _nodoAtual
                 );
+                _index += combinador.end()+j;
 
                 AdicionarNodo(nodo);
                 return;
@@ -244,21 +297,37 @@ public class GeradorDeCodigo {
 
     private void ObterDeclaracoesDeVariaveis(String substring) {
         Pattern padrao = Pattern.compile(_padraoNome);
-        var nodoDeclaracaoVariavel = new NodoDeclaracaoVariavel(_nodoAtual, ComandoVariavelEnums.COMANDO_VARIAVEL_VAR);
+        Pattern padraoIndesejavel = Pattern.compile("^class|^method|^begin|^self|^vars|^end|^if|^return|" +
+                                                    "^eq|^ne|^lt|^le|^gt|^ge|^new|^main|^io|^end-method|^end-class|^else|^end-if");
+        Matcher combinador = null;
+        Matcher combinadorIndesejaveis = null;
 
-        for(int j = 0;substring.charAt(j) != '\n';j++){
+        var nodoDeclaracaoVariavel = new NodoDeclaracaoVariavel(_nodoAtual, ComandoVariavelEnums.COMANDO_VARIAVEL_VAR);
+        int j = 0;
+
+        for(;substring.charAt(j) != '\n';j++){
             if(IgnorarCaractere(substring.charAt(j)))
                 continue;
 
-            Matcher combinador = padrao.matcher(_codigo.substring(j));
+            combinador = padrao.matcher(substring.substring(j));
+            combinadorIndesejaveis = padraoIndesejavel.matcher(substring.substring(j));
+
+            if(combinadorIndesejaveis.find()){
+                break;
+            }
+
             if(combinador.find()){
                 nodoDeclaracaoVariavel.AdicionarVariavel(new NodoVariavel(
                         substring.substring(combinador.start(),combinador.end()),
                         ComandoVariavelEnums.COMANDO_VARIAVEL_VAR,
                         nodoDeclaracaoVariavel
                 ));
+                j += combinador.end();
             }
         }
+        if(combinador != null)
+            _index += j-1;
+
         AdicionarNodo(nodoDeclaracaoVariavel);
     }
 
@@ -269,7 +338,7 @@ public class GeradorDeCodigo {
             return;
         }
 
-        AdicionarNodo(nodo, _nodoInicial.RetornarProximoNodo());
+        AdicionarNodo(nodo, _nodoInicial);
     }
 
     private void AdicionarNodo(NodoBase nodo, NodoBase proximoNodo){
@@ -282,14 +351,15 @@ public class GeradorDeCodigo {
         AdicionarNodo(nodo, proximoNodo.RetornarProximoNodo());
     }
 
-    private void AdicionarNodoListaTemp(NodoBase nodoAdicionar, NodoBase lista){
-        if(lista.RetornarProximoNodo() == null){
-            lista.DefinirProximoNodo(nodoAdicionar);
-            nodoAdicionar.DefinirNodoAnterior(lista);
+    private void AdicionarNodoListaTemp(NodoBase nodoAdicionar, NodoContainer lista){
+        if(lista.ObterNodo() == null){
+            lista.DefinirNodo(nodoAdicionar);
+            nodoAdicionar.DefinirNodoAnterior(lista.ObterNodo());
             return;
         }
 
-        AdicionarNodoListaTemp(nodoAdicionar, lista.RetornarProximoNodo());
+        var nodoContainer = new NodoContainer(lista.ObterNodo().RetornarProximoNodo());
+        AdicionarNodoListaTemp(nodoAdicionar,nodoContainer);
     }
 
     private NodoBase RetornaPrimeiroNodo(Class<?> tipo){
